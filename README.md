@@ -1,6 +1,6 @@
 # Open Universal Systems Manager
 
-![alt text](https://github.com/openusm/openusm/blob/master/images/openusm_logo.png)
+![alt text](https://github.com/collabnix/openusm/blob/master/images/openusm_logo.png)
 
 A modern approach to DellEMC Server Management, Insight Logs Analytics and Machine Learning solution integrated with monitoring & logging pipeline using Docker, Redfish, Prometheus & [ELK Stack](https://github.com/openusm/openusm/tree/master/logging).
 
@@ -12,7 +12,7 @@ A modern approach to DellEMC Server Management, Insight Logs Analytics and Machi
 - It is a platform agnostic solution(can be run from laptop, server or cloud) and works on any of Linux or Windows platform with Docker Engine running on top of it.
 <br></br>
 
-![alt text](https://github.com/openusm/openusm/blob/master/images/kibana_openusm.png)
+![alt text](https://github.com/collabnix/openusm/blob/master/images/kibana_openusm.png)
 <p>    ------------------- Kibana visualizing Pie-Chart for LC logs collected over the last 1 year time period--------------------</p>
 
 # Value Proposition
@@ -24,7 +24,7 @@ A modern approach to DellEMC Server Management, Insight Logs Analytics and Machi
 
 # Architecture
 
-![alt text](https://github.com/openusm/openusm/blob/master/images/openusm_technology_overview.png)
+![alt text](https://github.com/collabnix/openusm/blob/master/images/openusm_technology_overview.png)
 
 # How openUSM works?
 
@@ -32,7 +32,7 @@ OpenUSM uses "Container-Per-Server(CPS)" model. For each server management tasks
 
 
 
-![openusm](https://github.com/openusm/openusm/blob/master/images/openusm_workflow.png)
+![openusm](https://github.com/collabnix/openusm/blob/master/images/openusm_workflow.png)
 
 
 # Getting Started with OpenUSM
@@ -143,4 +143,4 @@ We invite new contributors to contribute towards this project repository. We wou
 
 # Quick Videos/ Resources
 
-[![Pushing iDRAC Logs to ELK Stack](https://github.com/openusm/openusm/blob/master/images/idrac_elk_logs.png)](https://www.youtube.com/watch?v=jbg4gcp0M8M)
+[![Pushing iDRAC Logs to ELK Stack](https://github.com/collabnix/openusm/blob/master/images/idrac_elk_logs.png)](https://www.youtube.com/watch?v=jbg4gcp0M8M)
