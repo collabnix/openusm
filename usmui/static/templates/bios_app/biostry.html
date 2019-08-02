@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% include "commons/header.html" %}
+<script>
+function loadAgain() {
+  var xhttp1 = new XMLHttpRequest();
+  xhttp1.onreadystatechange = function() {
+    if (xhttp1.readyState == 4 && xhttp1.status == 200) {
+   
+      document.getElementById("demo").innerHTML = xhttp1.responseText;
+       document.getElementById("results").style.display = "none";
+        document.getElementById("b1").style.display = "none";
+         document.getElementById("submit").style.display = "none";
+     
+		func1();
+    }
+  }
+  var h=document.getElementById("s1").value;
+  alert(h);
+   var file_name=document.getElementById("demo").innerHTML;
+  alert(file_name);
+   xhttp1.open("GET", "/bios_app/bios_change/?h="+h+"&file_name="+file_name, false);	 
+  xhttp1.send();
+}
+
+
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+   
+      document.getElementById("demo").innerHTML = xhttp.responseText;
+       document.getElementById("table").style.display = "block"; 
+      document.getElementById("b1").style.display = "block"; 
+        document.getElementById("s").style.display = "block"; 
+          document.getElementById("s1").style.display = "block"; 
+          document.getElementById("submit").style.display = "block";
+      
+		func();
+	
+    }
+  }
+    ipadd=document.getElementById("ipadd").value;
+    username=document.getElementById("username").value;
+    password=document.getElementById("password").value;
+
+  alert(password);
+	 //xhttp.open("GET", "/bios_return/?username="+username+"&password="+password, false);
+ xhttp.open("GET", "/bios_app/bios_return/?ipadd="+ipadd+"&username="+username+"&password="+password, false);
+  xhttp.send();
+}
+
+
+var text;
+function loadJSON(callback){
+	//('<img src="myfolder/' + myphoto + '" />')'
+	var hr = new XMLHttpRequest();
+	//url='"/static/json/' + x + '"';
+	//url='"/static/json/' + x.value + '"';
+	//url="/static/json/ + x + ";
+	//url="/static/json/ + x.value + ";
+	//url="/static/json/"+x;
+	//url="/static/json/"+x.value;
+	//var path = "/static\/json";
+	//var x = "/";
+	//var a= "abc.json";
+	//var url=path + x+ a;
+	//var url="/static/json/abc.json";
+	var path = "/static\/json";
+		var x = "/";
+		var a= document.getElementById("demo").innerHTML;
+		//alert(a);
+		var url=path + x+ a
+	
+	//console.log(path+x);
+	//url=path.join('/static', 'json', 'abc.json')
+	hr.open("GET", url, true);
+	//hr.open("GET", "/static/json/abc.json", true);
+
+	hr.setRequestHeader("Content-type", "application/json", false);
+	hr.onreadystatechange=function() {
+		if(hr.readyState == 4 && hr.status == 200) {
+		callback(hr.responseText);
+		}
+		
+	};
+	hr.send(null);
+}
+
+function func1() {
+
+loadJSON(function(response) {
+		// Parse JSON string into object
+  		var data1 = JSON.parse(response);
+		var results1= document.getElementById("results1");
+		//var data = ["SERIAL","STATUS", "ATTRIBUTE", "CHECKBOX"]
+		var data = ["SERIAL","STATUS", "ATTRIBUTE"] 
+	  	text = data1;
+		tablearea = document.getElementById('results1');
+		table = document.createElement('table');
+		$(table).addClass("table table-striped table-bordered bootstrap-datatable datatable");
+    	thead = document.createElement('thead');
+		tr = document.createElement('tr');
+		
+		for (var i = 0; i < data.length; i++) {
+			var headerTxt = document.createTextNode(data[i]);
+			$(headerTxt).addClass("center");
+			th = document.createElement('th');
+			th.appendChild(headerTxt);
+			$(th).addClass("center");
+			tr.appendChild(th);
+			thead.appendChild(tr);
+  			  }
+	
+		table.appendChild(thead);
+		for(i = 0; i < text.BIOS.length; i++) {
+		tr = document.createElement('tr');
+		td=document.createElement('td');
+		$("td").addClass("center");
+		tr.appendChild(td);
+		td=document.createElement('td');
+		tr.appendChild(td);
+		td=document.createElement('td');
+		tr.appendChild(td);
+		//td=document.createElement('td');
+    	//$("td").addClass("center");
+		//tr.appendChild(td); //Added for checkg box
+        //var checkbox = document.createElement("INPUT"); //Added for checkbox
+        //checkbox.type = "checkbox"; //Added for checkbox
+		//checkbox.name = "abc"+i;
+		//checkbox.id = "abc"+i;
+		
+		//checkbox.disabled="disabled";
+		//checkbox.style="display:none";
+		//$("checkbox").addClass("checkbx");
+		tr.cells[0].appendChild(document.createTextNode(i+1));
+		tr.cells[1].appendChild(document.createTextNode(text.BIOS[i].current_val));
+        tr.cells[2].appendChild(document.createTextNode(text.BIOS[i].attribute));
+      
+        //tr.cells[3].appendChild(checkbox); //Added for checkbox
+		table.appendChild(tr);
+    }
+		tablearea.appendChild(table);
+		 });}
+
+
+
+
+function func() {
+
+loadJSON(function(response) {
+		// Parse JSON string into object
+  		var data1 = JSON.parse(response);
+		var results= document.getElementById("results");
+		var data = ["SERIAL","STATUS", "ATTRIBUTE", "CHECKBOX"] 
+	  	text = data1;
+		tablearea = document.getElementById('results');
+		table = document.createElement('table');
+		$(table).addClass("table table-striped table-bordered bootstrap-datatable datatable");
+    	thead = document.createElement('thead');
+		tr = document.createElement('tr');
+		
+		for (var i = 0; i < data.length; i++) {
+			var headerTxt = document.createTextNode(data[i]);
+			$(headerTxt).addClass("center");
+			th = document.createElement('th');
+			th.appendChild(headerTxt);
+			$(th).addClass("center");
+			tr.appendChild(th);
+			thead.appendChild(tr);
+  			  }
+	
+		table.appendChild(thead);
+		for(i = 0; i < text.BIOS.length; i++) {
+		tr = document.createElement('tr');
+		td=document.createElement('td');
+		$("td").addClass("center");
+		tr.appendChild(td);
+		td=document.createElement('td');
+		tr.appendChild(td);
+		td=document.createElement('td');
+		tr.appendChild(td);
+		td=document.createElement('td');
+    	$("td").addClass("center");
+		tr.appendChild(td); //Added for checkg box
+        var checkbox = document.createElement("INPUT"); //Added for checkbox
+        checkbox.type = "checkbox"; //Added for checkbox
+		checkbox.name = "abc"+i;
+		checkbox.id = "abc"+i;
+		
+		//checkbox.disabled="disabled";
+		//checkbox.style="display:none";
+		//$("checkbox").addClass("checkbx");
+		tr.cells[0].appendChild(document.createTextNode(i+1));
+		tr.cells[1].appendChild(document.createTextNode(text.BIOS[i].current_val));
+        tr.cells[2].appendChild(document.createTextNode(text.BIOS[i].attribute));
+      
+        tr.cells[3].appendChild(checkbox); //Added for checkbox
+		table.appendChild(tr);
+    }
+		tablearea.appendChild(table);
+		 });}
+
+	function validatecheck(h)
+	{
+		var x=[];
+		for (i=0;i<text.BIOS.length;i++) 
+			{
+				if(document.getElementById("abc"+i).checked == true)
+					x[i]=1;
+				else
+					x[i]=0;
+			}
+		h.value=x;
+	
+	alert("Your selection has been validated, please continue your submission.");
+	}
+</script>
+
+		
+		
+		
+</head>
+
+<body>
+		{% include "commons/side_menu.html" %}		
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+			
+			<!-- start: Content -->
+			<div id="content" class="span10">
+			
+			
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="/dashboard/">Home</a>
+					<i class="icon-angle-right"></i> 
+				</li>
+				<li>
+					<i class="icon-edit"></i>
+					<a href="/bios_app/bios/">BIOS</a>
+				</li>
+			</ul>
+			
+			<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2>Please provide your iDRAC credentials.</h2>
+					
+					</div>
+					<div class="box-content">
+					
+			<form name='bios'>
+			<label for="ipadd"> IP Address:</label>
+			<input type="text" name="ipadd" value="" id="ipadd" autofocus onblur="ipadd_match()">
+			<p></p>
+		
+			<label for="username"> User name:</label>
+			<input type="text" name="username" value="" id="username" onblur="username_match()">
+			<p></p>
+			<label for="password"> Password:</label>
+			<input type="password" name="password" value="" id="password"  onblur="password_match()">
+			<p></p>
+										
+			<div class="form-actions">
+			<input type="button" id="mybtn" value="Connect"  class="btn btn-primary" onclick="loadDoc()" > <input type ="reset" class="btn">
+			</div>
+		</form>
+		
+		
+					</div>
+				</div><!--/span-->
+
+			</div><!--/row-->
+			
+<!-- start: Content -->
+	<form id="toggleform" class="toggle-soft">
+	<div id ="table" style="display:none;">
+			<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header">
+						<h2>Simple Table</h2>
+					</div>
+					<!--div class="box-content"-->
+						<p id="demo" style="display:none;"></p>
+
+						<div id="results"></div>
+						<div id="results1"></div>
+				
+
+						<div id="r"></div>
+			
+								<input type = "button" value="Validate" id="b1" class="btn btn-primary" onclick="validatecheck(h)" style="display:none;" >
+								<input type="hidden" name="s" id="s">  <input type ="hidden" name="h" id="s1">
+
+
+								&nbsp &nbsp<input type="button" value="submit" id="submit" class="btn btn-primary" onclick="loadAgain()" style="display:none;">
+
+						<div id="hi"></div>
+					
+					<!--/div-->
+				</div><!--span12-->
+		</div> <!-- rwo fluid sortable-->					
+</div><!--table-->
+
+			</form>		
+			
+
+
+<script>
+
+    $(function() {
+
+
+   var people = [];
+
+   $.getJSON('/static/json/priorities.json', function(data) {
+       $.each(data.person, function(i, f) {
+          var tblRow = "<tr>" + "<td>" + f.firstName + "</td>" +
+           "<td>" + f.lastName + "</td>" + "<td>" + f.job + "</td>" + "<td>" + f.roll + "</td>" + "</tr>"
+           $(tblRow).appendTo("#userdata tbody");
+     });
+
+   });
+
+});
+</script>
+			<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2>Please provide your iDRAC credentials.</h2>
+					
+					</div>
+					<div class="box-content">
+				
+					<div class="console">
+					
+					Hello world
+					<ul class="messagesList">
+		
+   <table id= "userdata">
+  <thead>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email Address</th>
+            <th>City</th>
+        </thead>
+      <tbody>
+
+
+       </tbody>
+   </table>
+					</div>
+			
+					
+	
+					</div>
+				</div><!--/span-->
+
+			</div><!--/row-->
+    
+
+
+
+
+				
+    
+
+	</div><!--/.fluid-container-->
+	
+			<!-- end: Content -->
+		</div><!--/#content.span10-->
+		</div><!--/fluid-row-->
+		
+	<div class="modal hide fade" id="myModal">
+		<div class="modal-header">
+			<!-- {<button type="button" class="close" data-dismiss="modal">×</button> } -->
+				
+			<h3>Settings</h3>
+		</div>
+		<div class="modal-body">
+			<p>Here settings can be configured...</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" class="btn btn-primary">Save changes</a>
+		</div>
+	</div>
+	
+	<div class="clearfix"></div>
+{% include "commons/footer.html" %}
+</body>
+</html>

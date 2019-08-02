@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html >
+	<head>
+    	<meta charset="UTF-8">
+    	<title>Universal Systems Manager</title>
+    	<link rel="stylesheet" href="/static/css/index_style.css">
+ 	</head>
+	
+	<body>
+		{% load static %}
+    	<div class="wrapper">
+			<div class="container">
+			<br/>
+			<br/>
+			<br/>
+			<img src="{% static "img/logo.png" %}" alt="Smiley face" height="100" width="250">
+			<h1>Universal Systems Manager</h1>
+			<br/>
+			<form class="form-horizontal" action="/redfish/login/" method="post">{% csrf_token %}
+				<p id="msg"><h2><font color="red">{{display}}</font></h2></p>
+				<input type="text" placeholder="Username" name="username" id="username" required>
+				<input type="password" placeholder="Password" name="password" id="password" required>			
+				<button type="submit" id="login-button">Login</button>
+				<button type="reset" id="reset-button">Reset</button><br/><br/>
+				<!-- font >New User? </font> &nbsp<a href="/login/register/"><font size="5" color="white">SignUp</font></a-->
+			</form>
+		</div>
+	
+		<ul class="bg-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		</div>
+		<script src='/static/js/jquery-1.9.1.min.js'></script>
+		<!-- <script src="/static/js/index.js"></script> -->
+
+	</body>
+</html>

@@ -1,0 +1,24 @@
+<html>
+
+<body>
+
+
+<form class="form-horizontal" method="post" action="../upload_process/", enctype="multipart/form-data">
+{% csrf_token %}
+
+  <input type="file" name="csvfile" accept="CSV/*">
+  <input type="submit">
+
+
+
+
+</form>
+
+
+
+
+</body>
+
+
+
+</html>

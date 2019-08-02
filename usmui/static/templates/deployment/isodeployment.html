@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% include "commons/header.html" %}		
+</head>
+
+<body>
+		{% include "commons/side_menu.html" %}		
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+			
+			<!-- start: Content -->
+			<div id="content" class="span10">
+			
+			
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="index.html">Home</a>
+					<i class="icon-angle-right"></i> 
+				</li>
+				<li>
+					<i class="icon-edit"></i>
+					<a href="#">Forms</a>
+				</li>
+			</ul>
+			
+			
+			{{ test }}
+			
+			
+			<div class="row-fluid sortable"  id="input_form">
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><i class="halflings-icon white edit"></i><span class="break"></span>Automated ISO File for Deployment</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<form class="form-horizontal" method="post" action="../process/", enctype="multipart/form-data">
+						  {% csrf_token %}
+						  <fieldset>
+						  
+							<div class="control-group">
+								<label class="control-label">iDRAC IP Address</label>
+								<div class="controls">
+								  <input id="idrac_IP_Address" name="idrac_IP_Address"  type="text"  
+								   value="{% if form_inputs.idrac_IP_Address %} {{form_inputs.idrac_IP_Address}} {% endif %}"
+								   class="input-xlarge{% if form_inputs.idrac_IP_Address %} uneditable-input{% endif %}"
+								   >
+								</div>
+							</div>
+						  
+							<div class="control-group">
+								<label class="control-label">iDRAC Username</label>
+								<div class="controls">
+								  <input id="idrac_Username" name="idrac_Username" type="text" 
+								  value="{% if form_inputs.idrac_Username %}{{form_inputs.idrac_Username}}{% endif %}"
+								  class="input-xlarge{% if form_inputs.idrac_Username %} uneditable-input{% endif %}">
+								</div>
+							</div>
+										
+							<div class="control-group">
+								<label class="control-label">iDRAC Password</label>
+								<div class="controls">
+								  <input id="idrac_Password" name="idrac_Password" type="text" 
+								  value="{% if form_inputs.idrac_Password %}{{form_inputs.idrac_Password}}{% endif %}"
+								  class="input-xlarge{% if form_inputs.idrac_Password %} uneditable-input{% endif %}" >
+								</div>
+							</div>
+						  
+							<div class="control-group">
+							  <label class="control-label" for="fileInput">ISO File Input</label>
+							  <div class="controls">
+								
+								<input class="input-file uniform_on" id="isoFile" name="isoFile" type="file" accept=".iso" onchange="extension()" >
+								<script>
+									function extension() {
+										//alert("inside");
+										var fname=document.getElementById("isoFile");
+										//alert("isofile "+fname.value);
+										//alert(fname.value.substr(fname.value.lastIndexOf('.')+1));
+										if(fname.value.substr(fname.value.lastIndexOf('.')+1) == "iso")
+											return true;
+										else 
+											{
+											alert("Please select only .iso files");
+											document.getElementById("isoFile").focus();
+											return false;
+											}
+										//alert(fname.split('.').pop());
+										}
+									
+								</script>
+								
+							  </div>
+							</div>          
+							
+							<div class="control-group">
+								<label class="control-label">Installation Medium</label>
+								<div class="controls">
+								  <label class="radio">	
+								  <input type="radio" name="installation_medium" id="usb" value="usb" checked onclick="checkradio1()">
+								     USB Media
+								  </label>
+								  <div style="clear:both"></div>
+								  	<label class="radio">
+								 	<input type="radio" name="installation_medium" id="local_lun" value="local" onclick="checkradio2()">
+									Local Lun Installation
+								  </label>
+								</div>
+							  </div>
+							  
+							  <script>
+								  		function checkradio1() {
+								  			//alert("hi");
+								  		    //var radios = document.getElementsById("local_lun");
+								  		 	document.getElementById("installation_type").style.display = "none"; 
+								  		}
+								  		
+								  		function checkradio2() {
+								  			//alert("hi");
+								  		    //var radios = document.getElementsById("local_lun");
+								  		 	document.getElementById("installation_type").style.display = "block"; 
+								  		}
+								  		
+								  		</script>
+							  
+							  						  
+							<div class="control-group" id="installation_type" style="display:none;">
+								<label class="control-label" >Installation Type</label>
+								<div class="controls">
+								  <label class="radio">
+									<input type="radio" name="installation_type" id="overwritevmfs" value="overwritevmfs" checked >
+									Over-Write VMFS
+								  </label>
+								  <div style="clear:both"></div>
+								  <label class="radio">
+									<input type="radio" name="installation_type" id="overwritevmfs" value="option2">
+									Preserve VMFS
+								  </label>
+								</div>
+							  </div>
+							  						  
+							 <div class="control-group">
+								<label class="control-label" for="inputSuccess">Password for the ISO</label>
+								<div class="controls">
+								  <input type="text" name="password" id="password">
+								  <span class="help-inline">Woohoo!</span>
+								</div>
+							  </div>
+						
+						
+						
+						
+							<div class="form-actions">
+							  <button type="submit" class="btn btn-primary" onclick="hideform()">Start Customization</button>
+							  <button type="reset" class="btn">Cancel</button>
+							</div>
+						  </fieldset>
+						</form>   
+
+					</div>
+				</div><!--/span-->
+
+			</div><!--/row-->
+	<script>
+			function hideform()
+			{
+			document.getElementById("input_form").style.display="none";
+			}
+			</script>
+
+		<div class="row-fluid sortable">
+		<div class="box span12">
+			<div class="box-header" data-original-title>
+				<h2><i class="halflings-icon white white bullhorn"></i><span class="break"></span>Output Console</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+						</div>	
+			</div><!--/box header-->
+			<div class="box-conten alertst">
+				<div class="console" id="consoleBox">
+					<div class="messagesList" id="comments"></div>
+						
+						
+				</div><!--/console-->
+			</div><!--/box content-->
+		</div><!--box span 12-->
+	</div>   <!--/row fluid sortable-->
+			
+		
+
+
+
+
+	</div><!--/.fluid-container-->
+	
+			<!-- end: Content -->
+		</div><!--/#content.span10-->
+		</div><!--/fluid-row-->
+		
+	<div class="modal hide fade" id="myModal">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Settings</h3>
+		</div>
+		<div class="modal-body">
+			<p>Here settings can be configured...</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" class="btn btn-primary">Save changes</a>
+		</div>
+	</div>
+	
+	<div class="clearfix"></div>
+	
+	<footer>
+
+		<p>
+			<span style="text-align:left;float:left">&copy; 2013 <a href="http://themifycloud.com/downloads/janux-free-responsive-admin-dashboard-template/" alt="Bootstrap_Metro_Dashboard">JANUX Responsive Dashboard</a></span>
+			
+		</p>
+
+	</footer>
+	
+	<!-- start: JavaScript-->
+{% include "commons/footer.html" %}
+	<!-- end: JavaScript-->
+	
+<script src="http://100.98.13.53:8010/socket.io/socket.io.js"></script>
+<script src="jquery.js"></script>
+
+<script type="text/javascript">
+
+    
+    $(document).ready(function(){
+
+    var socket = io.connect('http://100.98.13.53:8010');
+    socket.on('channel_console',
+        function (data) {
+            console.log(data);
+            // add comment to list
+
+        var obj = JSON.parse(data);
+        
+        
+        $('#comments').append(obj.message+ " -- "+obj.session_id+"&#13;&#10;");
+        
+        //$('#comments').append("<li>Hello</li>");
+        
+		$('#comments').scrollTop($('#comments')[0].scrollHeight)
+        console.log("++++ "+obj.submit_date);
+        });
+
+        
+
+        });
+</script>
+	
+	
+	
+</body>
+</html>

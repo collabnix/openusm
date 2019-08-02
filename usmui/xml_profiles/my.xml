@@ -1,0 +1,7 @@
+<?xml version="1.0" ?><SystemConfiguration Model="" ServiceTag="" TimeStamp="">
+<Component FQDD="BIOS.Setup.1-1">
+    <Attribute Name="ProcVirtualization">Disabled</Attribute>
+    <Attribute Name="LogicalProc">Disabled</Attribute>
+    <Attribute Name="ControlledTurbo">Enabled</Attribute>
+</Component>
+</SystemConfiguration>

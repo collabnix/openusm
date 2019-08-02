@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+{% include "commons/header.html" %}
+
+		<script type="text/javascript">
+
+	$(document).ready(function(){
+
+		$("#usb").click(function(){
+	
+			$("#installation_type").hide();
+	
+		});
+	
+		$("#local_lun").click(function(){
+		
+			alert("Clicked");
+			$("#installation_type").show();
+	
+		});
+
+	});
+
+</script>
+		
+
+		
+</head>
+
+<body>
+{% include "commons/side_menu.html" %}	
+
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+			
+			<!-- start: Content -->
+			<div id="content" class="span10">
+			
+			
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="index.html">Home</a>
+					<i class="icon-angle-right"></i> 
+				</li>
+				<li>
+					<i class="icon-edit"></i>
+					<a href="#">Deployment</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><i class="halflings-icon white edit"></i><span class="break"></span>Automated ISO File for Deployment</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<form class="form-horizontal" method="post" action="../process/", enctype="multipart/form-data">
+						  {% csrf_token %}
+						  <fieldset>
+						  
+							
+						  
+							<div class="control-group">
+							  <label class="control-label" for="fileInput">ISO File Input</label>
+							  <div class="controls">
+								<input class="input-file uniform_on" id="isoFile" name="isoFile" type="file">
+								<script>
+									var isofile=document.getElementById("isoFile").innerHTML;
+									alert(isofile);
+								</script>
+							  </div>
+							</div>          
+							
+							<div class="control-group">
+								<label class="control-label">Installation Medium</label>
+								<div class="controls">
+								  <label class="radio">
+								  	
+								  	{% if form_dict.installation_medium == "usb" %}
+								  		<input type="radio" name="installation_medium" id="usb" value="usb" checked>
+									
+									{% else %}
+									<input type="radio" name="installation_medium" id="usb" value="usb">
+									
+									{% endif %}
+									USB Media
+								  </label>
+								  <div style="clear:both"></div>
+								  	<label class="radio">
+								  
+								  {% if form_dict.installation_medium == "local" %}
+								  		<input type="radio" name="installation_medium" id="local_lun" value="local" checked>
+									
+									{% else %}
+									<input type="radio" name="installation_medium" id="local_lun" value="local">
+									
+									{% endif %}
+								  
+									Local Lun Installation
+								  </label>
+								</div>
+							  </div>
+							  						  
+							<div class="control-group" id="installation_type">
+								<label class="control-label">Installation Type</label>
+								<div class="controls">
+								  <label class="radio">
+									<input type="radio" name="installation_type" id="overwritevmfs" value="overwritevmfs" checked="">
+									Over-Write VMFS
+								  </label>
+								  <div style="clear:both"></div>
+								  <label class="radio">
+									<input type="radio" name="installation_type" id="overwritevmfs" value="option2">
+									Preserve VMFS
+								  </label>
+									</div>
+							  </div>
+							  						  
+							 <div class="control-group">
+								<label class="control-label" for="inputSuccess">Password for the ISO</label>
+								<div class="controls">
+								  <input type="text" name="password" id="password">
+								  <span class="help-inline">Woohoo!</span>
+								</div>
+							  </div>
+						
+						
+						
+						
+							<div class="form-actions">
+							  <button type="submit" class="btn btn-primary">Start Customization</button>
+							  <button type="reset" class="btn">Cancel</button>
+							</div>
+						  </fieldset>
+						</form>   
+
+					</div>
+					
+					
+				
+					
+				</div><!--/span-->
+
+			
+
+			</div><!--/row-->
+
+			
+			
+			<div class=row-fluid">
+				<div class="box span12">
+					<div class="box-header">
+						<h2><i class="halflings-icon white white bullhorn"></i><span class="break"></span>Output Console</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+						</div>
+					</div>
+					<div class="box-content alerts">
+					
+						
+					<textarea class="messagesList" id="comments" rows="10" cols="900"> </textarea>
+						
+					</div>
+					
+			</div><!--/span-->
+			
+		</div><!--/row-->
+		<div class="row-fluid sortable">
+		<div class="box span12">
+			<div class="box-header" data-original-title>
+				<h2><i class="halflings-icon white white bullhorn"></i><span class="break"></span>Output Console</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+						</div>	
+			</div><!--/box header-->
+			<div class="box-conten alertst">
+				<div class="console" id="consoleBox">
+					<div class="messagesList" id="comments"></div>
+						
+						
+				</div><!--/console-->
+			</div><!--/box content-->
+		</div><!--box span 12-->
+	</div>   <!--/row fluid sortable-->
+			
+
+
+			
+			
+			
+			<div class=row-fluid" id="Download_Section">
+				<div class="box span12">
+					<div class="box-header">
+						<h2><i class="halflings-icon white white bullhorn"></i><span class="break"></span>Download Links</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+						</div>
+					</div>
+					<div class="box-content alerts">
+						
+						<div class="alert alert-success" id="Download_Alerts">
+							
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>Well done!</strong> You File is successfully created and ready for download.
+							<div id="link" name="link"></div>
+							
+						</div>
+						
+					</div>
+					
+			</div><!--/span-->
+			
+		</div><!--/row-->
+
+
+
+	</div><!--/.fluid-container-->
+	
+			<!-- end: Content -->
+		</div><!--/#content.span10-->
+		</div><!--/fluid-row-->
+		
+	<div class="modal hide fade" id="myModal">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Settings</h3>
+		</div>
+		<div class="modal-body">
+			<p>Here settings can be configured...</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" class="btn btn-primary">Save changes</a>
+		</div>
+	</div>
+	
+	<div class="clearfix"></div>
+	
+	<footer>
+
+		<p>
+			<span style="text-align:left;float:left">&copy; 2013 <a href="http://themifycloud.com/downloads/janux-free-responsive-admin-dashboard-template/" alt="Bootstrap_Metro_Dashboard">JANUX Responsive Dashboard</a></span>
+			
+		</p>
+
+	</footer>
+	
+
+	
+	<script src="http://100.98.13.53:8010/socket.io/socket.io.js"></script>
+
+
+	<script type="text/javascript">
+
+	var sessionid = '{{test}}'
+
+    $(document).ready(function(){
+	
+	$('#Download_Section').hide();
+	
+    var socket = io.connect('http://100.98.13.53:8010');
+    socket.on('channel_console',
+        function (data) {
+            console.log(data);
+            // add comment to list
+
+        	var obj = JSON.parse(data);
+        
+        
+        	$('#comments').append(obj.message+ " -- "+obj.session_id+"&#13;&#10;");
+        
+        	//$('#comments').append("<li>Hello</li>");
+        
+			$('#comments').scrollTop($('#comments')[0].scrollHeight)
+        	console.log("++++ "+obj.submit_date);
+       });
+
+	socket.on('channel_file_path',
+        function (data) {
+            
+            
+            console.log(data);
+            // add comment to list
+
+        	var obj = JSON.parse(data);
+       
+        	console.log("++++ "+obj.submit_date);
+       		console.log("Link Address "+obj.message)
+       		alert(obj.message);
+       		
+
+
+       		var link = document.getElementById("link");
+       		var aTag = document.createElement('a');
+       		aTag.setAttribute('href',obj.message);
+       		aTag.innerHTML = "Download Link";
+       		link.appendChild(aTag);
+       		
+       		$('#Download_Section').show();
+       		//document.getElementById("link").innerHTML = '<a href="' + obj.message + '">'+Download Link+'</a>';
+   //    		$('#Download_Alerts').append("<a href='www.google.com'>Download Link</a>");
+       		
+       		
+       		
+       		
+       
+       });
+
+
+   });
+   
+      
+
+</script>
+	
+	
+{% include "commons/footer.html" %}
+	
+</body>
+</html>

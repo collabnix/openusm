@@ -1,0 +1,33 @@
+language: python
+python:
+  - 2.7
+
+services:
+  - docker
+
+install:
+  - docker build -t openusm/openusm .
+  
+
+before_script:
+  - pip install requests
+ 
+env:
+  global:
+    - secure: "qYUyqoHIJLQAxqtj2xBflokCqNLzQ/CPsSnl9t2gFt94tLYZJn2TeEI/BL6rxvNlaOOsXKPeCLKLH256B3aM8Px9Q6D65oVZ5QPWQiCNxq+ahIHJoVmDTMmp2aVzfQ8Ko5H65zbnBPC5xO8W1NFItNC+tV3tdqGfgwsD5/qHtYGVQqTMOLa59EBe2LijaW9CiD4SpoLo3UDRj/+qFGUK5zIxdZtKDiKRYiKOGIx3at0fBYgNfIlqiy1r3I44K9vicUOoSeLOUmhifDJd5GKK1sOiw70WAHPqcNmLrlR7CYRsZlWkeL8xVYwgiYeN2i8JaNIaDKzIQ+NM8P7jzsRMIFWAMvZxogC74qJHFXE0yYgPwriGplTijoQqnAmd3tKUgIJFlOoj0WaBwHlD9LtJLAht65WX2ap9lgiGwIVmxj1PHWdkZpO7Z7KwZ2grmyWdmpbrchljZfiQ7sfPiQuVlgxQy11+FbgKxaiXYKSZpxM1uwJNdjpI0H/Tg3k9LdmoFpkiPAlCubtw4WvxoW7xCCaDJ4t0pLJ6QsSGG3e/q1T/mx2obLkQgNmDALT/qrySYHF/a5jPD2CNWUOOH9vRXSdYMAZ9EippiJlqp9NL7jz/ctmpYCyvWAdViDOfXz32miVr4zNMkMTmzSBvcYpg7uVXzleJT1Xc+rcUGKbWYc0=" # DOCKER_EMAIL
+    - secure: "MA1h3GBSfncy+2V2u4nCC5nyiKl/ILVhTn02jEii3Nb42ZXGLmAOmS8qgrAoTfCQAa896FXbosUJ2gRiFSiir6GoA2kvQtm1ogqqisXHruIXfYdGfChxiRMFsnZ6G8o+juMb7uetTpDOmJZq307s0AG2RC6WEbWdi7sfEbZKzWj2vcMGGyKAUBnKt7mAPr3tT0rAdjcXf++/pXa3SOFyvsYO9fFpEXpGmoMLUcP+NjFRqvMhHZL8ARsv+SuObsH4HLn0BSwkK06+njyL75WwFp7DNU8pdQitdSVr7tvt+2xa2RwTRZoCiqfC+b0EbTt3M2RP46/HBEYy9Kjo7FW+lyFtgHRfGhArl1ND2ixGoxjlH9/EESq91o3MqZZnOgg6FL2zHMOxNltJ53S6TqmOm2Cl0WMtZy6Tm/9C7YzE9L1cfyNCYZyYLKN9Q6Eo6E8DUzNu325SLQun7OXJWEobU0G4BNselWT7rKROrmthBATRU0wJqrgVB9+pNcSIU5AIaE2DWSoaS/kQoGOa4ry2faruDErZmJB+uaP5MIMd3LwzVRrMQJ2DNNrRawcQgkbu8KfvtzIGNcepoC+2+iSJ05tVA+ZhvVk4st2Y7OQSCC5JJj9M4mH4B97uIt1F1DXdFtAGjSROeNve8e1TDb6Z99g+CbqvnLPv0iRFc8kDwng=" # DOCKER_USER
+    - secure: "jxngceor7ooIJ7VHR43T0axQkTHD2BZ9udeRumwpit3X8LuMu6ZclYqYjz/UHegN0KY9jF32fyeYFzVxVDkkeJ4Rn3zvlv1w4NLZ/+pJHA4K2lyrY0P4xKcFOaDsUve4eydAYOUkoh0csbm5Q/IRTY/EOpJ0L3+77xvca9i9q1IXE6UNkc805MRLw+/EkZtZu6960YrSLyffUFIT3YZy3ZSj/BCpVyqFLDVo0STFEztNv2bM7RsGnxDHFxEDRmQRSgTUq9mogL6a+zv/G26b6tyYt0G3eOegnUVSffdz7t8m7QcGqdnYEVWNBxgAz2AuQcxqu50XOblVMtNYiaSTMJwLSudwj4zgrMPFlIINe8/caR1sOAGBO7scBaVt/GQ2Cjbg5Wi2Or+IrGe7E2rMMidBZdWKTUh8JTUSrVA3lfEgRgnqZmUbAeQzIum2t3EtAx2rIfJEiWPTry2BlvvVYgkySWaKwV3HOTDtHCUb+ccVIC663wstPaIvXhp6EkQILIVhkYE0Tq/264wA0CQDwvliVh8DWi1El3TRSFfZCtUKVq6HLU8pCApXXvY81wl6X301vfHFZTKRB5NjVzL1ym35nWOpgTu0vRyUW/uuNS+pxm2KWYfmOy/YfygEHXboCmONDKu/fY1fLdd1dzLe1UrNWw0N2mGY/9aUX4VtN/I=" $DOCKER_PASSWORD
+    - COMMIT=${TRAVIS_COMMIT::8} 
+ 
+script:
+  - python bios-token.py --help
+  
+  
+after_success:
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - export REPO=openusm/openusm
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build -f Dockerfile -t $REPO:$COMMIT .
+  - docker tag $REPO:$COMMIT $REPO:$TAG
+  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker push $REPO

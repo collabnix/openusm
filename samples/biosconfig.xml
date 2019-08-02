@@ -1,0 +1,9 @@
+
+<SystemConfiguration>
+<Component FQDD="BIOS.Setup.1-1">
+      <Attribute Name="MemOpMode">OptimizerMode</Attribute>
+      <Attribute Name="LogicalProc">Disabled</Attribute>
+      <Attribute Name="ProcVirtualization">Disabled</Attribute>
+      <Attribute Name="ControlledTurbo">Disabled</Attribute>
+</Component>
+</SystemConfiguration>

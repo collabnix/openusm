@@ -1,0 +1,32 @@
+
+{"R720":[
+		{
+  				"Idrac": "10.10.112.73",
+			  	"username": "root",
+			  	"password": "calvin"
+		}],
+
+"R820":[
+		{
+  				"Idrac": "10.10.112.80",
+			  	"username": "root",
+			  	"password": "calvin"
+		}],
+
+"R530":[
+		{
+  				"Idrac": "10.10.2.195",
+			  	"username": "root",
+			  	"password": "calvin"
+		}],
+
+"R730":[
+		{
+  				"Idrac": "10.10.4.239",
+			  	"username": "root",
+			  	"password": "calvin"
+		}]
+
+}
+
+

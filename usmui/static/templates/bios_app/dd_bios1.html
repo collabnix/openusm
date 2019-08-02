@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% include "commons/header.html" %}
+ <script type='text/javascript' src='/static/js/jquery-1.6.2.js'></script>
+   <script type='text/javascript' src='/static/js/jquery-ui.js'></script>
+   <style>
+   
+
+
+.sortable-dragging {
+  border-color: #ccc !important;
+  background-color: #fafafa !important;
+  color: #bbb !important;
+}
+.sortable-placeholder {
+  height: 40px;
+}
+.source .sortable-placeholder {
+  border: 2px dashed #f8e0b1 !important;
+  background-color: #fefcf5 !important;
+}
+.target .sortable-placeholder {
+  border: 2px dashed #add38d !important;
+  background-color: #f6fbf4 !important;
+}
+</style>
+
+
+
+
+  
+   
+   
+   
+   
+   
+<style type='text/css'>
+    #droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+    .draggable {
+width:180px;
+height:200px;
+//border:solid 1px #ccc;
+}
+
+.draggable ul {
+  min-height: 50px;
+  margin: 0px 25px 10px 0px;
+  padding: 2px;
+  border-width: 1px;
+  border-style: solid;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  list-style-type: none;
+  list-style-position: inside;
+border-color: #f8e0b1;
+margin:0px;
+padding:0px;
+}
+.draggable ul li {
+background-color: #fcf8e3;
+  border: 1px solid #fbeed5;
+  color: #c09853;
+list-style-type:none;
+margin: 5px;
+  padding: 5px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.drop {
+width:400px;
+height:200px;
+margin:10px 0px 0px 0px;
+border:solid 1px #ccc;
+
+}
+.drop1 {
+
+width:70px;
+height:100px;
+
+
+}
+.drop1 ul {
+  min-height: 50px;
+  margin: 0px 25px 10px 0px;
+  padding: 2px;
+  border-width: 1px;
+  border-style: solid;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  list-style-type: none;
+  list-style-position: inside;
+border-color: #add38d;
+margin:0px;
+padding:0px;
+ border-color: #add38d;
+}
+.drop1 ul li {
+margin: 5px;
+  padding: 5px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  
+ background-color: #ebf5e6;
+  border: 1px solid #d6e9c6;
+  color: #468847;
+}
+
+.needed {
+
+background-color: #ebf5e6;
+  border: 1px solid #d6e9c6;
+  color: #468847;
+}
+.tble{padding:0px 10px 0px 10px;}
+.unol{
+}
+
+.form-actions1 {
+    padding: 19px 20px 20px;
+    
+}
+
+  </style>
+   
+   
+   
+   
+   </head>
+<body>
+
+<script type='text/javascript'>//<![CDATA[
+
+$(document).ready(function() {
+    $(".list").draggable();
+    //$(".list").draggable({helper: 'clone'});
+    $(".drop1").droppable({
+        accept: '.list',
+        hoverClass: 'dropareahover',
+        drop: function(ev, ui){
+         var targetId = $(this).attr("id");
+         var draggableId = ui.draggable.attr("id");
+         
+         
+         //alert(draggableId);
+		 //alert("hello");
+		 //alert(targetId);
+		 
+		  $('<li />', {id: "unol"+draggableId}).appendTo('ul.unol');
+		  
+		  //alert("done");
+		  //var varia="#"+"unol"+draggableId;
+       $("#"+"unol"+draggableId).append(ui.draggable.html());
+       //$("#abc").append("hey");
+       //$("#draggable").children().attr("disabled","disabled");
+       //alert("hel");
+         //var allTargets = $("#" + targetId, ".tble");
+         //allTargets.append(ui.draggable.html());
+         loadjson(draggableId);
+       
+        }
+ });      
+});
+//]]> 
+
+</script>
+
+<script>
+function loadjson(draggableId)
+{ //alert("inside");
+var jqxhr = $.getJSON( "/static/templates/bios_app/dd.json/", function(data) {
+  console.log( "success");
+  var items = [];
+  //var list = $('#list')
+  var ele_val = document.getElementById(draggableId).innerHTML;
+  //alert(ele_val);
+  $.each( data, function( key, val ) {
+	  if(key == ele_val)
+		  {
+	  //alert(key + val[0]['Idrac']);
+	  
+	  //alert("value=" + val1);
+	  var ip=data[ele_val][0]['Idrac'];
+	  $('#idrac_IP_Address').val(ip);
+	  var username=data[ele_val][0]['username'];
+	  $('#idrac_Username').val(username);
+	  var password=data[ele_val][0]['password'];
+	  $('#idrac_Password').val(password);
+	 /// alert(ip);
+	  //alert(username);
+	  //			alert(password);
+		  }
+	  
+    //var items = [];
+     //items = ( "<li id='" + key + "'>" + val + "</li>" );
+	 //list.append(items)
+	 
+  });
+});
+}
+
+
+
+
+ </script>
+
+
+
+{% include "commons/side_menu.html" %}	
+
+	
+	
+	 
+	<noscript>
+		<div class="alert alert-block span10">
+			<h4 class="alert-heading">Warning!</h4>
+			<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+		</div>
+	</noscript>
+			
+	<!-- start: Content -->
+	<div id="content" class="span10">
+		<ul class="breadcrumb">
+			<li>
+				<i class="icon-home"></i>
+				<a href="/dashboard/">Home</a>
+				<i class="icon-angle-right"></i> 
+			</li>
+			<li>
+				<i class="icon-edit"></i>
+				<a href="/bios_app/bios/">BIOS</a>
+			</li>
+		</ul>
+		<div class="alert alert-error">
+			<center><strong> Do not refresh or close the page while the process is in execution.</strong> </center>
+		</div>
+		
+
+		<!-- start: Content -->
+		 <span id="xx" />
+
+
+
+    	<div class="box span2">
+					<div class="box-header">
+						<h2>Labels</h2>
+					</div>
+					<div class="box-content">
+							<div class="draggable">
+								<ul >
+									<li class="list" id="1" value="R720">R720</li>
+									<li class="list" id="2" value="R820">R820</li>
+									<li class="list" id="3" value="R530">R530</li>
+									<li class="list" id="4" value="R730">R730</li>
+									
+								</ul>
+							</div>
+					</div>
+		</div><!--/span-->
+				
+		<div class="box span2">
+			<div class="box-header">
+				<h2>Labels</h2>
+			</div>
+			<div class="box-content">
+				<div id="droppable" class="drop1">
+					<ul class="unol">
+						
+					</ul>
+				</div>
+				<form  class="form-horizontal" method="post" action="/inventory/process/", enctype="multipart/form-data">
+				{% csrf_token %}
+					<fieldset>
+						<input type='hidden' id='idrac_IP_Address'name="idrac_IP_Address">
+						<input type='hidden' id='idrac_Username'name="idrac_Username">
+						<input type='hidden' id='idrac_Password'name="idrac_Password">	
+						<div class="form-actions1">
+						<button type="submit"  >Run</button>
+						</div>
+					</fieldset>
+		
+				</form> 
+			
+			</div>
+		</div><!--/span-->
+		
+				
+					 
+		<form>
+			<div id ="table" style="display:none;">
+				<div class="row-fluid sortable">
+					<div class="box span12">
+						<div class="box-header">
+							<h2>Simple Table</h2>
+						</div>
+						<div class="box-content">
+							<p id="demo" style="display:none;"></p>
+							<div id="results"></div>
+							<div id="results1"></div>
+							<div id="r"></div>											
+							<input type = "button" value="Validate" id="b1" class="btn btn-primary" onclick="validatecheck(h)" style="display:none;" >
+							<input type="hidden" name="s" id="s"> 
+							<input type ="hidden" name="h" id="s1">
+							<div id="hi"></div>
+						</div>
+					</div><!--/span-->
+				</div><!--/row-->
+			</div>
+		</form>
+
+		<div class="row-fluid sortable">
+			<div class="box span12">
+				<div class="box-header" data-original-title>
+					<h2>Console</h2>
+				</div>
+				<div class="box-content">
+					<div class="console" id="consoleBox">
+						<ul class="messagesList" id="console">
+							<table id= "userdata" class="table  bootstrap-datatable">
+								<tbody></tbody>
+   							</table>
+   						</ul>
+					</div>
+				</div>
+			</div><!--/span-->
+		</div><!--/row-->
+	</div><!--/.fluid-container-->
+	<!-- end: Content -->
+		
+	<div class="modal hide fade" id="myModal">
+		<div class="modal-header">
+			<!-- {<button type="button" class="close" data-dismiss="modal">×</button> } -->
+				
+			<h3>Settings</h3>
+		</div>
+		<div class="modal-body">
+			<p>Here settings can be configured...</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" class="btn btn-primary">Save changes</a>
+		</div>
+	</div>
+	
+	<div class="clearfix"></div>
+	{% include "commons/footer.html" %}
+	
+	<script src="http://10.10.2.163:8010/socket.io/socket.io.js"></script>
+	<script src="/static/js/bios_validation.js"></script>
+	
+</body>
+</html>

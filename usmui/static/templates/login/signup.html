@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html >
+	<head>
+    	<meta charset="UTF-8">
+    	<title>Calm breeze login screen</title>
+        <link rel="stylesheet" href="/static/css/index_style.css">
+	</head>
+	<body>
+	    <div class="wrapper">
+			<div class="container">
+			<h1>Welcome to HE Automation Framework v2.0</h1>
+				<form class="form" name="registration" action="/login/form_get/" method="post">{% csrf_token %}
+					<p id="msg"><font color="red"><h2>{{display}}</h2></font></p>
+					<input type="text" placeholder="First Name" name="fname" id="fname" required>   
+					<input type="text" placeholder="Last Name" name="lname" id="lname" required>
+					<input type="text" placeholder="Username" name="name" id="username" required>   
+					<input type="email" placeholder="Email" name="email" id="email" required>
+					<input type="number" placeholder="Contact Number" name="phone" id="phone" required>
+					<input type="password" placeholder="Password" name="passid1" id="p1" required onblur="pwd_match()"> 
+					<input type="password" placeholder="Confirm Password" name="passid2" id="p2" required onblur="pwd_match()">
+				
+					
+					<button type="submit" id="login-button">SignUp</button><br/><br/>
+				</form>
+			</div>
+	
+			<ul class="bg-bubbles">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<script src='/static/js/signup_validation.js'></script>
+  		<script src='/static/js/jquery-1.9.1.min.js'></script>
+		<!--  script src="/static/js/index.js"></script>-->
+	</body>
+</html>

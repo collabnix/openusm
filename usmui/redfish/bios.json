@@ -1,0 +1,18 @@
+{
+    "SystemConfiguration" : {
+    	
+    	"Model" : "",
+    	"ServiceTag" : "",
+    	
+        "Component" : {
+        	"FQDD" : "BIOS.Setup.1-1"
+        	
+        	"Attribute": {
+            	"ProcVirtualization" : "Enabled",
+            	"LogicalProc"        : "Enabled",
+            	"SriovGlobalEnable"  : "Disabled"
+        }
+        
+        }
+    }
+}	

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% include "commons/header.html" %}		
+		
+</head>
+
+<body>
+	<!-- start: Header -->
+	{% include "commons/side_menu.html" %}
+	<noscript>
+		<div class="alert alert-block span10">
+			<h4 class="alert-heading">Warning!</h4>
+			<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+		</div>
+	</noscript>
+	<!-- start: Content -->
+		<div id="content" class="span10">
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="/dashboard/">Home</a>
+					<i class="icon-angle-right"></i> 
+				</li>
+				<li>
+					<i class="icon-edit"></i>
+					<a href="/inventory/">Inventory</a>
+				</li>
+			</ul>
+			{{ test }}
+			<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><i class="halflings-icon white edit"></i><span class="break"></span>Enter the iDRAC Credentials to get the System Inventory</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<form class="form-horizontal" method="post" action="process/", enctype="multipart/form-data">
+						 {% csrf_token %}
+							<fieldset>
+						  		<div class="control-group">
+									<label class="control-label">iDRAC IP Address</label>
+									<div class="controls">
+								  		<input id="idrac_IP_Address" name="idrac_IP_Address"  type="text"  class="input-xlarge"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">iDRAC Username</label>
+									<div class="controls">
+										<input id="idrac_Username" name="idrac_Username"  type="text"  class="input-xlarge"/>  
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">iDRAC Password</label>
+									<div class="controls">
+										<input id="idrac_Password" name="idrac_Password"  type="text"  class="input-xlarge"/>
+									</div>
+								</div>
+								<div class="form-actions">
+									<button type="submit" class="btn btn-primary">Get Inventory</button>
+							  		<button type="reset" class="btn">Cancel</button>
+								</div>
+						  	</fieldset>
+						</form>   
+					</div>
+				</div><!--/span-->
+
+			</div><!--/row-->
+		</div><!--/.fluid-container-->
+	<!-- end: Content -->
+		
+	<div class="modal hide fade" id="myModal">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Settings</h3>
+		</div>
+		<div class="modal-body">
+			<p>Here settings can be configured...</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" class="btn btn-primary">Save changes</a>
+		</div>
+	</div>
+	
+	<div class="clearfix"></div>
+	
+	<footer>
+
+		<p>
+			<span style="text-align:left;float:left">&copy; 2013 <a href="http://themifycloud.com/downloads/janux-free-responsive-admin-dashboard-template/" alt="Bootstrap_Metro_Dashboard">JANUX Responsive Dashboard</a></span>
+			
+		</p>
+
+	</footer>
+	
+	<!-- start: JavaScript-->
+	{% include "commons/footer.html" %}
+	<script src="http://localhost:8010/socket.io/socket.io.js"></script>
+	<script src="/static/js/inventory_input.js"></script>
+<script src="jquery.js"></script>
+
+
+
+	
+</body>
+</html>

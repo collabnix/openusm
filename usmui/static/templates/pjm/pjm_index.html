@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% include "commons/header.html" %}		
+		
+</head>
+
+<body>
+	<!-- start: Header -->
+	{% include "commons/side_menu.html" %}
+		
+	<noscript>
+		<div class="alert alert-block span10">
+			<h4 class="alert-heading">Warning!</h4>
+			<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+		</div>
+	</noscript>
+	<!-- start: Content -->
+		<div id="content" class="span10">
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="/pjm/pjm_index/">Home</a>
+					<i class="icon-angle-right"></i> 
+				</li>
+				<li>
+					<i class="icon-edit"></i>
+					<a href="/inventory/">Inventory</a>
+				</li>
+			</ul>
+			{{ test }}
+
+<style>
+#right
+{
+
+    margin-right:10px;
+    margin-bottom:5px; 
+   	width:150px;
+    border-radius:40px;
+    text-align: center
+ }
+</style>
+	<ul class="nav nav-pills nav-justified">
+<li id="right" class="active"><a href="/pjm/query/input/">Query</a></li>
+<li id="right" class="active"><a href="/pjm/swb/">SWB</a></li>
+	
+<li id="right" class="active"><a href="/pjm/platform/">Platform</a></li>
+<li id="right" class="active"><a href="/pjm/generation/">Generation</a></li>
+<li id="right" class="active"><a href="/pjm/os/">OS</a></li>
+	
+<li id="right" class="active"><a href="/pjm/update/">Update</a></li>
+<li id="right" class="active"><a href="/pjm/revision/">Revision</a></li>
+	</ul>
+
+	
+			
+	<!-- end: Content -->
+		
+	<div class="modal hide fade" id="myModal">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Settings</h3>
+		</div>
+		<div class="modal-body">
+			<p>Here settings can be configured...</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" class="btn btn-primary">Save changes</a>
+		</div>
+	</div>
+	
+	<div class="clearfix"></div>
+	
+	<footer>
+
+		<p>
+			<span style="text-align:left;float:left">&copy; 2013 <a href="http://themifycloud.com/downloads/janux-free-responsive-admin-dashboard-template/" alt="Bootstrap_Metro_Dashboard">JANUX Responsive Dashboard</a></span>
+			
+		</p>
+
+	</footer>
+	
+	<!-- start: JavaScript-->
+	{% include "commons/footer.html" %}
+	<script src="http://localhost:8010/socket.io/socket.io.js"></script>
+	<script src="/static/js/inventory_input.js"></script>
+<script src="jquery.js"></script>
+
+
+
+	
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+{% include "commons/header.html" %}
+</head>
+
+<body>
+<script>
+	function pass_server_id(server_id)
+	{
+		var url1 ="/redfish\/servers\/delete";
+		var url2 ="/";
+		var url3=server_id;
+		var url=url1+url2+url3;
+		document.getElementById("d1").href=url;
+	}
+</script>
+
+<style>
+
+#right
+{
+    float:right;
+    margin-right:20px;
+    margin-bottom:5px; 
+   	width:200px;
+   	height : 40px;
+    border-radius:40px;
+    text-align: center
+    
+  }
+</style>
+
+
+{% include "commons/side_menu.html" %}
+<noscript>
+	<div class="alert alert-block span10">
+		<h4 class="alert-heading">Warning!</h4>
+		
+	</div>
+</noscript>
+			
+<!-- start: Content -->
+	<div id="content" class="span10">
+		<ul class="breadcrumb">
+			<li>
+				<i class="icon-home"></i>
+				<a href="#">Home</a>
+				<i class="icon-angle-right"></i> 
+			</li>
+			<li>
+				<i class="icon-edit"></i>
+				<a href="/redfish/servers/">Servers</a>
+			</li>
+		</ul>
+	
+		
+	{% include "commons/pjm_index.html" %}
+	
+	<ul class="nav nav-pills nav-justified">
+	<li id="right" class="active"><a href="/redfish/servers/insert/">Add Server</a></li>
+	</ul>
+		<div class="row-fluid sortable">		
+		
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><i class="halflings-icon tasks"></i><span class="break"></span>Server List</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+						</div>
+					</div>
+					
+					
+					
+					<div class="box-content">
+						
+						
+						{% if serverlist %}
+						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+						  <thead>
+							  <tr>
+								  <th>ID</th>
+								  <th>Server IP</th>
+								  <th>Server Details </th> 
+								  <th>Quick Actions</th>
+							  </tr>
+						  </thead>   
+						  <tbody>
+						  
+						  
+						  {% for server in serverlist %}
+							<tr>
+								<td>{{server.id}}</td>
+								<td>{{server.ip}}</td>
+								
+								
+								<td>
+								<a href="/redfish/servers/details/{{server.id}}"><span class="label label-success">Click for Details</span></a>
+								
+								</td>
+								
+								<td class="center">
+								
+									<a class="btn btn-success" title="Power On Server" href="/redfish/servers/poweron/{{server.id}}">
+										<i class="halflings-icon white off"></i>  
+									</a>
+									
+									<a class="btn btn-waring" title="Restart Server" href="/redfish/servers/reset/{{server.id}}">
+										<i class="halflings-icon white repeat"></i>  
+									</a>
+									
+									<a class="btn btn-info" title="Update Server Details" href="/redfish/servers/update/{{server.id}}">
+										<i class="halflings-icon white edit"></i>  
+									</a>
+									
+									<a class="btn btn-danger btn-setting" title="Delete Server Details" href="" onclick="pass_server_id({{server.id}})">
+										<i class="halflings-icon white trash"></i> 
+									</a>
+									
+
+									
+								</td>
+							</tr>
+							{% endfor %}
+						  </tbody>
+					  </table>
+					  {% else %}
+					  	
+					  	<p> No Servers in the database </p>
+					  {% endif %}	
+					              
+					</div>
+				</div><!--/span-->
+			
+			</div><!--/row-->
+		
+		
+
+
+	</div><!--/.fluid-container-->
+	
+<!-- end: Content -->
+		
+<div class="modal hide fade" id="myModal">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+		<div class="modal-body">
+			<p>Are you sure you want to remove the Server?</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">No</a>
+			<a href="" id="d1" class="btn btn-primary">Yes</a>
+		</div>
+</div>
+
+<div class="clearfix"></div>
+	
+	<footer>
+
+		<p>
+			<span style="text-align:left;float:left">&copy; 2013 <a href="http://themifycloud.com/downloads/janux-free-responsive-admin-dashboard-template/" alt="Bootstrap_Metro_Dashboard">JANUX Responsive Dashboard</a></span>
+			
+		</p>
+
+	</footer>
+	
+	<!-- start: JavaScript-->
+	
+		
+{% include "commons/footer.html" %}
+	
+	
+	<script src="/static/js/customization_validation.js"></script>	
+</body>
+</html>
