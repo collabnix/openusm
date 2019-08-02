@@ -69,7 +69,7 @@ If you have Docker already installed on your system, you can skip this step. If 
 
 Ensure that ```curl```package is already installed on this system.
 
-<a href="https://asciinema.org/a/D7Sy9ouLPWc3aWa5RVPKuMOaK" target="_blank"><img src="https://asciinema.org/a/D7Sy9ouLPWc3aWa5RVPKuMOaK.png" /></a>
+
 
 ## Manual Method:
 
@@ -98,9 +98,7 @@ Execute the same bootstrap file with provision-elk argument to bring up ELK stac
 
 Just wait for 30-40 seconds to get ELK stack up and running.
 
-<a href="https://asciinema.org/a/cBXn0IBsmf97zoHZLI3Qtgl7B" target="_blank"><img src="https://asciinema.org/a/cBXn0IBsmf97zoHZLI3Qtgl7B.png" /></a>
 
-<a href="https://asciinema.org/a/AJzkQ1po7uozrM1ER7IZbY8ct" target="_blank"><img src="https://asciinema.org/a/AJzkQ1po7uozrM1ER7IZbY8ct.png" /></a>
 
 ## Configuring syslog service for Docker daemon
 
