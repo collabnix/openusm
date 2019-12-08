@@ -5,7 +5,7 @@ services:
     image: postgres
   web:
     build: .
-    command: bash -c "python manage.py migrate && python manage.py runserver 100.98.26.42:8000"
+    command: bash -c "python manage.py migrate && python manage.py runserver 192.168.0.13:8000"
     volumes:
       - .:/code
     ports:
