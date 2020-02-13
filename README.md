@@ -130,6 +130,10 @@ OpenUSM is a suite of tools and utilities which configures and manage the lifecy
 [Introducing OpenUSM](http://en.community.dell.com/techcenter/systems-management/w/wiki/12502.introducing-openusm-simplifying-server-management-insight-log-analytics-using-docker-containers)<br>
 [OpenUSM - Let Containers Manage Your datacenter](http://collabnix.com/introducing-openusm-simplifying-server-management-insight-log-analytics-using-docker-containers/)<br>
 
+## Webinars
+
+[Online Webinar on OpenUSM](https://www.slideshare.net/ajeetraina/collabnix-online-webinar-integrated-log-analytics-monitoring-using-docker-elastic-stack)
+
 
 ## Roadmap ahead
 
