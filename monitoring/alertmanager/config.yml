@@ -6,6 +6,6 @@ receivers:
       slack_configs:
           - send_resolved: true
             text: "{{ .CommonAnnotations.description }}"
-            username: 'Ajeet_Raina'
+            username: 'collabnix'
             channel: '#collabnixworld'
             api_url: 'https://hooks.slack.com/services/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'
