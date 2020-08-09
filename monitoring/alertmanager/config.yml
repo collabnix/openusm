@@ -8,4 +8,4 @@ receivers:
             text: "{{ .CommonAnnotations.description }}"
             username: 'Ajeet_Raina'
             channel: '#collabnixworld'
-            api_url: 'https://hooks.slack.com/services/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'
+            api_url: 'https://hooks.slack.com/services/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'
