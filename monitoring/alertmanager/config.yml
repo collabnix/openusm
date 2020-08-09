@@ -7,5 +7,5 @@ receivers:
           - send_resolved: true
             text: "{{ .CommonAnnotations.description }}"
             username: 'collabnix'
-            channel: '#collabnixworld'
+            channel: '#prom'
             api_url: 'https://hooks.slack.com/services/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'
